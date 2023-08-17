@@ -1,14 +1,23 @@
 import streamlit as st
-import snowflake.connector
-# Connect to Snowflake
-conn = snowflake.connector.connect(
-    user='darshan8',
-    password='Darsh@1234',
-    account='go52266.ap-south-1',
-    warehouse='COMPUTE_WH',
-    database='NEXUS',
-    schema='history_makers'
-)
+from snowflake.snowpark.session import Session
+from snowflake.snowpark import functions as F
+from snowflake.snowpark.types import *
+from snowflake.snowpark.functions import udf
+import pandas as pd
+import numpy as np
+
+connection_parameters = {
+  "account": "go52266.ap-south-1",
+    "user": "darshan8",
+    "password": "Darsh@1234",
+    "role": "ACCOUNTADMIN",
+"warehouse": "COMPUTE_WH",
+ "database": "NEXUS",
+ "schema": "history_makers"
+}
+
+conn = Session.builder.configs(connection_parameters).create()
+
 def verify_code(verification_code):
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM EMP WHERE code = '{verification_code}' AND attended = FALSE")
