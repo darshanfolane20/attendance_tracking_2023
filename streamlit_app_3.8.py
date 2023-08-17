@@ -1,5 +1,5 @@
 import streamlit as st
-
+import snowflake.connector
 # Connect to Snowflake
 conn = snowflake.connector.connect(
     user='darshan8',
