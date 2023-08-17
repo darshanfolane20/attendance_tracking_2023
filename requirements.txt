@@ -1,4 +1,4 @@
-snowflake-snowpark-python[pandas]
+snowflake-snowpark-python
 snowflake-sqlalchemy
 aiohttp==3.8.4
 aiosignal==1.3.1
