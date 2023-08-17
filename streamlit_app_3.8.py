@@ -1,5 +1,5 @@
 import streamlit as st
-
+conn = st.experimental_connection('snowpark')
 def verify_code(verification_code):
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM EMP WHERE code = '{verification_code}' AND attended = FALSE")
@@ -20,6 +20,6 @@ if st.button('Verify'):
             st.error('Invalid code or code already used.')
 # Display attendance count
 cursor = conn.cursor()
-cursor.execute("SELECT COUNT(*) FROM attendees WHERE attended = TRUE")
+cursor.execute("SELECT COUNT(*) FROM EMP WHERE attended = TRUE")
 attendance_count = cursor.fetchone()[0]
 st.write(f'Total Attended: {attendance_count}')
