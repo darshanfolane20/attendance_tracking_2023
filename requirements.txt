@@ -1,3 +1,5 @@
+streamlit==1.11.0
+-r 
 # Generated on: Python 3.8.16
 asn1crypto==1.5.1
 certifi==2023.5.7
