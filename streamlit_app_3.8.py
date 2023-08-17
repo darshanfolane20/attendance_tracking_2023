@@ -1,4 +1,3 @@
-pip install streamlit
 import streamlit as st
 import snowflake.connector
 # Connect to Snowflake
