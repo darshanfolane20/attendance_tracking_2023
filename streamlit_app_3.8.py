@@ -1,5 +1,5 @@
 import streamlit as st
-conn = st.experimental_connection('snowpark')
+conn = st.experimental_connection('snowflake', type='sql')
 def verify_code(verification_code):
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM EMP WHERE code = '{verification_code}' AND attended = FALSE")
