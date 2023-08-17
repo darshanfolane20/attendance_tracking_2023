@@ -1,23 +1,14 @@
 import streamlit as st
-from snowflake.snowpark.session import Session
-from snowflake.snowpark import functions as F
-from snowflake.snowpark.types import *
-from snowflake.snowpark.functions import udf
-import pandas as pd
-import numpy as np
-
-connection_parameters = {
-  "account": "go52266.ap-south-1",
-    "user": "darshan8",
-    "password": "Darsh@1234",
-    "role": "ACCOUNTADMIN",
-"warehouse": "COMPUTE_WH",
- "database": "NEXUS",
- "schema": "history_makers"
-}
-
-conn = Session.builder.configs(connection_parameters).create()
-
+import snowflake.connector
+# Connect to Snowflake
+conn = snowflake.connector.connect(
+    user='darshan8',
+    password='Darsh@1234',
+    account='go52266.ap-south-1',
+    warehouse='COMPUTE_WH',
+    database='NEXUS',
+    schema='history_makers'
+)
 def verify_code(verification_code):
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM EMP WHERE code = '{verification_code}' AND attended = FALSE")
@@ -41,4 +32,3 @@ cursor = conn.cursor()
 cursor.execute("SELECT COUNT(*) FROM attendees WHERE attended = TRUE")
 attendance_count = cursor.fetchone()[0]
 st.write(f'Total Attended: {attendance_count}')
-
