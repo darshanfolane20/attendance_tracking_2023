@@ -1,14 +1,6 @@
 import snowflake.connector
 import streamlit as st
-# Connect to Snowflake
-conn = snowflake.connector.connect(
-    user='darshan8',
-    password='Darsh@1234',
-    account='go52266.ap-south-1',
-    warehouse='COMPUTE_WH',
-    database='NEXUS',
-    schema='history_makers'
-)
+
 def verify_code(verification_code):
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM EMP WHERE code = '{verification_code}' AND attended = FALSE")
