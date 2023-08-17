@@ -1,4 +1,3 @@
-import snowflake.connector
 import streamlit as st
 
 def verify_code(verification_code):
